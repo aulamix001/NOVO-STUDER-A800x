@@ -1,2 +1,3 @@
-7696ca6e516cba4aa37efacc8e52080020010a2cb17c4ab81b97dd114ca9709c  A800-Technical-Prototype-Windows-x64.zip
-a81d8f816d37b97a7ca3dd278c07c75300bc28a543846faf9ff0d81832be06dc  A800-Technical-Prototype-Source.zip
+10fdc7479f2a4d04727f74b99ec33bb9ad1c8c4c94e52c5ac90f461e389368b4  A800-Visual-0.2.0-Windows-x64.zip
+10fdc7479f2a4d04727f74b99ec33bb9ad1c8c4c94e52c5ac90f461e389368b4  A800-Technical-Prototype-Windows-x64.zip
+0595d2cd8bed3a72d07699c3cee6a1e934104d84b3a43b92c76b0c09a6925c22  A800-Technical-Prototype-Source.zip

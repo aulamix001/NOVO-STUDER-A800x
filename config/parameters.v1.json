@@ -1,0 +1,955 @@
+{
+  "schema_version": 1,
+  "status": "technical_prototype_partial_dsp_not_hardware_emulation",
+  "audio_channels": 2,
+  "visual_channels": 2,
+  "parameters": [
+    {
+      "id": "machine_version",
+      "version_hint": 1,
+      "label": "Machine type",
+      "type": "choice",
+      "default": "15/7.5",
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "7.5/3.75",
+        "15/7.5",
+        "30/15"
+      ]
+    },
+    {
+      "id": "speed_select",
+      "version_hint": 1,
+      "label": "SPEED",
+      "type": "choice",
+      "default": "Fast",
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "Slow",
+        "Fast"
+      ]
+    },
+    {
+      "id": "eq_standard",
+      "version_hint": 1,
+      "label": "EQ",
+      "type": "choice",
+      "default": "NAB",
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "NAB",
+        "CCIR"
+      ]
+    },
+    {
+      "id": "vu_jumper",
+      "version_hint": 1,
+      "label": "VU line reference",
+      "type": "choice",
+      "default": 4,
+      "effect": "meter",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        0,
+        4,
+        6,
+        8
+      ]
+    },
+    {
+      "id": "tape_type",
+      "version_hint": 1,
+      "label": "Tape",
+      "type": "choice",
+      "default": "SCOTCH 3M 250",
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "SCOTCH 3M 226",
+        "SCOTCH 3M 206",
+        "SCOTCH 3M 263",
+        "SCOTCH 3M 250",
+        "SCOTCH 3M 256",
+        "AGFA PEM 468",
+        "AGFA PER 525",
+        "AMPEX 406",
+        "AMPEX 456",
+        "BASF LGR 30 P",
+        "BASF SPR 50 LH",
+        "EMI 816/817",
+        "PYRAL CJ 90",
+        "AGFA PER 528",
+        "BASF LGR 50"
+      ]
+    },
+    {
+      "id": "bias_fast",
+      "version_hint": 1,
+      "label": "BIAS SETTING FAST",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.714",
+      "unit": "dB",
+      "range_ref": "kBiasOffsetRangeDb"
+    },
+    {
+      "id": "erase_fast",
+      "version_hint": 1,
+      "label": "ERASE FAST",
+      "type": "float",
+      "default": 0,
+      "effect": "visual",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.714",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "bias_slow",
+      "version_hint": 1,
+      "label": "BIAS SETTING SLOW",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.714",
+      "unit": "dB",
+      "range_ref": "kBiasOffsetRangeDb"
+    },
+    {
+      "id": "erase_slow",
+      "version_hint": 1,
+      "label": "ERASE SLOW",
+      "type": "float",
+      "default": 0,
+      "effect": "visual",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.714",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "osc_stop",
+      "version_hint": 1,
+      "label": "Oscillator stop",
+      "type": "bool",
+      "default": false,
+      "effect": "visual",
+      "source": "user_specification_unverified_against_manual"
+    },
+    {
+      "id": "varispeed_on",
+      "version_hint": 1,
+      "label": "VARISPEED",
+      "type": "bool",
+      "default": false,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual"
+    },
+    {
+      "id": "varispeed_semitones",
+      "version_hint": 1,
+      "label": "Varispeed",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "unit": "semitones",
+      "range_ref": "kVarispeedRangeSemitones"
+    },
+    {
+      "id": "calibrate",
+      "version_hint": 1,
+      "label": "CALIBRATE",
+      "type": "bool",
+      "default": false,
+      "effect": "meter_and_calibration",
+      "source": "user_specification_unverified_against_manual"
+    },
+    {
+      "id": "mastersafe",
+      "version_hint": 1,
+      "label": "MASTERSAFE",
+      "type": "bool",
+      "default": false,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual"
+    },
+    {
+      "id": "sync_range",
+      "version_hint": 1,
+      "label": "Sync range",
+      "type": "choice",
+      "default": "wide",
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "wide",
+        "narrow"
+      ],
+      "card": "1.180.711"
+    },
+    {
+      "id": "in_sens_plus7",
+      "version_hint": 1,
+      "label": "Input sensitivity",
+      "type": "choice",
+      "default": "normal",
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "normal",
+        "+7 dB"
+      ],
+      "card": "1.180.712"
+    },
+    {
+      "id": "treble_boost_tc",
+      "version_hint": 1,
+      "label": "Lower speed treble boost time",
+      "type": "choice",
+      "default": "0",
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "0",
+        "C",
+        "B",
+        "A"
+      ],
+      "card": "1.180.712"
+    },
+    {
+      "id": "treble_boost_amt",
+      "version_hint": 1,
+      "label": "Lower speed treble boost amount",
+      "type": "choice",
+      "default": 1,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "card": "1.180.712"
+    },
+    {
+      "id": "repro_input",
+      "version_hint": 1,
+      "label": "Repro input",
+      "type": "choice",
+      "default": "normal",
+      "effect": "visual",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "normal",
+        "external"
+      ],
+      "card": "1.180.710"
+    },
+    {
+      "id": "stereo_link",
+      "version_hint": 1,
+      "label": "Stereo link",
+      "type": "bool",
+      "default": true,
+      "effect": "editor_link",
+      "source": "user_specification_unverified_against_manual"
+    },
+    {
+      "id": "transport_modelling",
+      "version_hint": 1,
+      "label": "Transport modelling",
+      "type": "bool",
+      "default": false,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual"
+    },
+    {
+      "id": "alignment_dbfs",
+      "version_hint": 1,
+      "label": "0 VU alignment",
+      "type": "float",
+      "default": -18,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "unit": "dBFS",
+      "range_ref": "kAlignmentRangeDbfs"
+    },
+    {
+      "id": "ch1_src",
+      "version_hint": 1,
+      "label": "Monitor",
+      "type": "choice",
+      "default": "REPRO",
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "INPUT",
+        "REPRO",
+        "SYNC"
+      ]
+    },
+    {
+      "id": "ch1_rec_input_level",
+      "version_hint": 1,
+      "label": "Record Input Level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rep_out1_level",
+      "version_hint": 1,
+      "label": "Output 1 Level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_syn_out2_level",
+      "version_hint": 1,
+      "label": "Output 2 Level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rec_fast_level",
+      "version_hint": 1,
+      "label": "REC FAST level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rec_fast_treble",
+      "version_hint": 1,
+      "label": "REC FAST treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rec_slow_level",
+      "version_hint": 1,
+      "label": "REC SLOW level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rec_slow_treble",
+      "version_hint": 1,
+      "label": "REC SLOW treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rep_fast_level",
+      "version_hint": 1,
+      "label": "REP FAST level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rep_fast_treble",
+      "version_hint": 1,
+      "label": "REP FAST treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rep_fast_bass",
+      "version_hint": 1,
+      "label": "REP FAST bass",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rep_slow_level",
+      "version_hint": 1,
+      "label": "REP SLOW level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rep_slow_treble",
+      "version_hint": 1,
+      "label": "REP SLOW treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_rep_slow_bass",
+      "version_hint": 1,
+      "label": "REP SLOW bass",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_syn_fast_level",
+      "version_hint": 1,
+      "label": "SYN FAST level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_syn_fast_treble",
+      "version_hint": 1,
+      "label": "SYN FAST treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_syn_fast_bass",
+      "version_hint": 1,
+      "label": "SYN FAST bass",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_syn_slow_level",
+      "version_hint": 1,
+      "label": "SYN SLOW level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_syn_slow_treble",
+      "version_hint": 1,
+      "label": "SYN SLOW treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_syn_slow_bass",
+      "version_hint": 1,
+      "label": "SYN SLOW bass",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch1_ch_adjust",
+      "version_hint": 1,
+      "label": "CH. ADJUST",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.714",
+      "unit": "dB",
+      "range_ref": "kFineBiasRangeDb"
+    },
+    {
+      "id": "ch2_src",
+      "version_hint": 1,
+      "label": "Monitor",
+      "type": "choice",
+      "default": "REPRO",
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "values": [
+        "INPUT",
+        "REPRO",
+        "SYNC"
+      ]
+    },
+    {
+      "id": "ch2_rec_input_level",
+      "version_hint": 1,
+      "label": "Record Input Level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rep_out1_level",
+      "version_hint": 1,
+      "label": "Output 1 Level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_syn_out2_level",
+      "version_hint": 1,
+      "label": "Output 2 Level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rec_fast_level",
+      "version_hint": 1,
+      "label": "REC FAST level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rec_fast_treble",
+      "version_hint": 1,
+      "label": "REC FAST treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rec_slow_level",
+      "version_hint": 1,
+      "label": "REC SLOW level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rec_slow_treble",
+      "version_hint": 1,
+      "label": "REC SLOW treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.712",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rep_fast_level",
+      "version_hint": 1,
+      "label": "REP FAST level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rep_fast_treble",
+      "version_hint": 1,
+      "label": "REP FAST treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rep_fast_bass",
+      "version_hint": 1,
+      "label": "REP FAST bass",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rep_slow_level",
+      "version_hint": 1,
+      "label": "REP SLOW level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rep_slow_treble",
+      "version_hint": 1,
+      "label": "REP SLOW treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_rep_slow_bass",
+      "version_hint": 1,
+      "label": "REP SLOW bass",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.710",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_syn_fast_level",
+      "version_hint": 1,
+      "label": "SYN FAST level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_syn_fast_treble",
+      "version_hint": 1,
+      "label": "SYN FAST treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_syn_fast_bass",
+      "version_hint": 1,
+      "label": "SYN FAST bass",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_syn_slow_level",
+      "version_hint": 1,
+      "label": "SYN SLOW level",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_syn_slow_treble",
+      "version_hint": 1,
+      "label": "SYN SLOW treble",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_syn_slow_bass",
+      "version_hint": 1,
+      "label": "SYN SLOW bass",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.711",
+      "unit": "dB",
+      "range_ref": "kTrimRangeDb"
+    },
+    {
+      "id": "ch2_ch_adjust",
+      "version_hint": 1,
+      "label": "CH. ADJUST",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "user_specification_unverified_against_manual",
+      "card": "1.180.714",
+      "unit": "dB",
+      "range_ref": "kFineBiasRangeDb"
+    }
+  ],
+  "speed_pairs_ips": {
+    "7.5/3.75": [
+      3.75,
+      7.5
+    ],
+    "15/7.5": [
+      7.5,
+      15
+    ],
+    "30/15": [
+      15,
+      30
+    ]
+  },
+  "bias_table": {
+    "source": "user_specification_table_2_6_not_verified",
+    "speeds_ips": [
+      3.75,
+      7.5,
+      15,
+      30
+    ],
+    "rows": [
+      {
+        "tape": "SCOTCH 3M 226",
+        "overbias_db": [
+          6,
+          6,
+          3.5,
+          1.5
+        ]
+      },
+      {
+        "tape": "SCOTCH 3M 206",
+        "overbias_db": [
+          5.5,
+          5.5,
+          3,
+          1.5
+        ]
+      },
+      {
+        "tape": "SCOTCH 3M 263",
+        "overbias_db": [
+          6,
+          6,
+          3,
+          1
+        ]
+      },
+      {
+        "tape": "SCOTCH 3M 250",
+        "overbias_db": [
+          5,
+          6,
+          3.5,
+          1
+        ]
+      },
+      {
+        "tape": "SCOTCH 3M 256",
+        "overbias_db": [
+          6,
+          6.5,
+          3.5,
+          1
+        ]
+      },
+      {
+        "tape": "AGFA PEM 468",
+        "overbias_db": [
+          6,
+          6,
+          3.5,
+          1.5
+        ]
+      },
+      {
+        "tape": "AGFA PER 525",
+        "overbias_db": [
+          6,
+          6,
+          3,
+          1
+        ]
+      },
+      {
+        "tape": "AMPEX 406",
+        "overbias_db": [
+          6,
+          5,
+          3,
+          1.5
+        ]
+      },
+      {
+        "tape": "AMPEX 456",
+        "overbias_db": [
+          5,
+          6.5,
+          3.5,
+          1.5
+        ]
+      },
+      {
+        "tape": "BASF LGR 30 P",
+        "overbias_db": [
+          6,
+          6,
+          4,
+          1.5
+        ]
+      },
+      {
+        "tape": "BASF SPR 50 LH",
+        "overbias_db": [
+          6,
+          5.5,
+          3.5,
+          1.5
+        ]
+      },
+      {
+        "tape": "EMI 816/817",
+        "overbias_db": [
+          6,
+          6.5,
+          4,
+          1.5
+        ]
+      },
+      {
+        "tape": "PYRAL CJ 90",
+        "overbias_db": [
+          6,
+          6.5,
+          3.5,
+          1.5
+        ]
+      },
+      {
+        "tape": "AGFA PER 528",
+        "overbias_db": [
+          6,
+          6,
+          3.5,
+          1.5
+        ]
+      },
+      {
+        "tape": "BASF LGR 50",
+        "overbias_db": [
+          6,
+          6,
+          4,
+          1.5
+        ]
+      }
+    ]
+  }
+}
