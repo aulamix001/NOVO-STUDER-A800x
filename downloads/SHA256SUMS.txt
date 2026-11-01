@@ -1,0 +1,2 @@
+7696ca6e516cba4aa37efacc8e52080020010a2cb17c4ab81b97dd114ca9709c  A800-Technical-Prototype-Windows-x64.zip
+a81d8f816d37b97a7ca3dd278c07c75300bc28a543846faf9ff0d81832be06dc  A800-Technical-Prototype-Source.zip
