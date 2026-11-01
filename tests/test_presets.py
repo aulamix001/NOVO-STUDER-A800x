@@ -14,7 +14,7 @@ class Presets(unittest.TestCase):
    values=p['parameters']; self.assertEqual(set(values),{x['id'] for x in m['parameters']})
    for spec in m['parameters']:
     if spec['type']=='choice': self.assertIn(values[spec['id']],spec['values'])
-    if spec['type']=='float' and spec.get('unit')=='dB': self.assertEqual(values[spec['id']],0)
+    if spec['type']=='float' and spec.get('unit')=='dB': self.assertEqual(values[spec['id']],spec['default'])
    pair=m['speed_pairs_ips'][values['machine_version']]
    self.assertEqual(pair[values['speed_select']=='Fast'],p['speed_ips'])
    row=next(r for r in m['bias_table']['rows'] if r['tape']==p['tape'])

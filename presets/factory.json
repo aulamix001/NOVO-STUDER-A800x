@@ -74,7 +74,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -150,7 +156,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -226,7 +238,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -302,7 +320,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -378,7 +402,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -454,7 +484,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -530,7 +566,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -606,7 +648,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -682,7 +730,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -758,7 +812,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -834,7 +894,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -910,7 +976,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -986,7 +1058,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1062,7 +1140,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1138,7 +1222,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1214,7 +1304,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1290,7 +1386,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1366,7 +1468,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1442,7 +1550,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1518,7 +1632,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1594,7 +1714,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1670,7 +1796,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1746,7 +1878,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1822,7 +1960,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1898,7 +2042,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -1974,7 +2124,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2050,7 +2206,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2126,7 +2288,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2202,7 +2370,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2278,7 +2452,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2354,7 +2534,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2430,7 +2616,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2506,7 +2698,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2582,7 +2780,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2658,7 +2862,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2734,7 +2944,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2810,7 +3026,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2886,7 +3108,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -2962,7 +3190,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3038,7 +3272,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3114,7 +3354,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3190,7 +3436,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3266,7 +3518,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3342,7 +3600,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3418,7 +3682,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3494,7 +3764,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3570,7 +3846,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3646,7 +3928,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3722,7 +4010,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3798,7 +4092,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3874,7 +4174,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -3950,7 +4256,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4026,7 +4338,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4102,7 +4420,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4178,7 +4502,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4254,7 +4584,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4330,7 +4666,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4406,7 +4748,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4482,7 +4830,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4558,7 +4912,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4634,7 +4994,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4710,7 +5076,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4786,7 +5158,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4862,7 +5240,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -4938,7 +5322,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5014,7 +5404,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5090,7 +5486,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5166,7 +5568,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5242,7 +5650,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5318,7 +5732,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5394,7 +5814,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5470,7 +5896,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5546,7 +5978,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5622,7 +6060,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5698,7 +6142,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5774,7 +6224,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5850,7 +6306,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -5926,7 +6388,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6002,7 +6470,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6078,7 +6552,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6154,7 +6634,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6230,7 +6716,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6306,7 +6798,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6382,7 +6880,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6458,7 +6962,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6534,7 +7044,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6610,7 +7126,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6686,7 +7208,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6762,7 +7290,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     },
     {
@@ -6838,7 +7372,13 @@
         "ch2_syn_slow_level": 0,
         "ch2_syn_slow_treble": 0,
         "ch2_syn_slow_bass": 0,
-        "ch2_ch_adjust": 0
+        "ch2_ch_adjust": 0,
+        "tape_drive": 0,
+        "tape_mix": 100,
+        "tape_noise": -80,
+        "tape_wow": 15,
+        "tape_flutter": 10,
+        "tape_record": true
       }
     }
   ]

@@ -1,6 +1,7 @@
 #pragma once
 #include <juce_audio_utils/juce_audio_utils.h>
 #include <array>
+#include "dsp/TapeModel.h"
 class A800Processor final : public juce::AudioProcessor {
 public:
  A800Processor();
@@ -25,6 +26,8 @@ public:
  juce::AudioProcessorValueTreeState state;
  // UI observes atomics only; no editor or graphics work on the audio thread.
  std::array<std::atomic<float>,2> meterRms{{0.f,0.f}};
+ std::atomic<bool> memoActive{false};
+ std::atomic<double> memoPosition{0.0};
  std::atomic<bool> hostPlaying{false},hostRecording{false};
  std::atomic<bool> transportShortcutEnabled{true};
  std::atomic<std::uint64_t> transportRevision{0};
@@ -39,6 +42,13 @@ private:
   std::atomic<float>* repro[2]{};
   std::atomic<float>* sync[2]{};
   juce::SmoothedValue<float> gain;
+  a800::TapeModel tape;
+  std::atomic<float>* recordTreble[2]{};
+  std::atomic<float>* reproTreble[2]{};
+  std::atomic<float>* reproBass[2]{};
+  std::atomic<float>* syncTreble[2]{};
+  std::atomic<float>* syncBass[2]{};
+  std::atomic<float>* fineBias{};
  };
  std::array<Channel,2> channels;
  std::atomic<float>* safe{};
@@ -47,5 +57,8 @@ private:
  std::atomic<double> sampleRate{48000.0};
  std::atomic<float>* calibrateMeter{};
  std::atomic<int> currentProgram{18};
+ std::array<std::atomic<float>*,70> parameterValues{};
+ float parameter(const char* id) const noexcept;
+ a800::TapeSettings tapeSettings(size_t ch) const noexcept;
  float targetGain(const Channel&) const noexcept;
 };

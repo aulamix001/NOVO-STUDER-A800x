@@ -1,43 +1,39 @@
-# A800 — VST3 estéreo / interface visual 0.2.1
+# A800 Tape DSP — 0.3.0
 
-Este projeto ainda **não emula o som de fita da A800**. Implementa infraestrutura JUCE, 64 parâmetros versionados, ganhos por canal com suavização, seleção INPUT/REPRO/SYNC em nível de roteamento/ganho, MASTERSAFE limpo, persistência de estado e 90 programas de alinhamento. A interface MACHINE agora utiliza a própria arte estéreo de referência, com knobs, seletores, medidores e contador interativos. [Detalhes da interface](docs/VISUAL-INTERFACE.md).
+**[Baixar VST3 Windows x64 — 0.3.0](downloads/A800-Tape-0.3.0-Windows-x64.zip?raw=true)** · [Como instalar](downloads/README.md)
 
-Os controles `[PENDING]` no host guardam estado mas não implementam o DSP completo: EQ, seleção da formulação da fita, bias, treble/bass, varispeed, calibração de saída e stereo link. A interface visual limpa esses sufixos das etiquetas; SETTINGS e tooltips explicam o estado de implementação. VUs, contador e indicadores do host agora funcionam como medição/animação de software. `[VISUAL]` não tem DSP por especificação. Machine type permanece como configuração; Speed seleciona apenas os trimpots Level ativos. Não há oversampling ou latência porque não há estágio não linear implementado.
+Plugin VST3 estéreo com processamento de fita: saturação suave dependente do nível, memória magnética aproximada, ênfase/deênfase de gravação/reprodução, head bump, perda de agudos, bias, hiss e wow/flutter. O estágio não linear trabalha internamente em 4x com filtros IIR de interpolação/decimação.
 
-INPUT usa entrada com Input Level e sensibilidade; REPRO e SYNC têm saídas de ganho separadas. O ponto de tap INPUT ainda precisa ser conferido no manual. MASTERSAFE passa sinal original sem ganho. Os ganhos têm rampa de 20 ms, uma escolha de software.
+É um modelo de engenharia inspirado em gravadores de fita, **sem calibração por medições de uma Studer A800 real**. Os 15 perfis nomeados são aproximações; não representam curvas medidas das formulações. Não se afirma equivalência sonora ao hardware nem aos plugins comerciais. [Modelo e controles](docs/TAPE-DSP.md).
 
-## Windows 10/11 x64 — build MSVC 2022
+## Uso
 
-Instale Visual Studio 2022 com Desktop development with C++, Windows SDK, CMake, Git e Python 3. Execute em Developer PowerShell:
+- Use REPRO para o efeito completo. INPUT monitora a entrada com ganho e sensibilidade; SYNC usa a equalização e a largura de banda de sincronismo.
+- Aumente Tape drive em TAPE FX (SETTINGS) para mais saturação. Tape wet mix permite mistura paralela; 100% é a posição recomendada para evitar interferência de fase entre caminhos.
+- Machine type e SPEED selecionam a velocidade efetiva, a resposta espectral e os trimpots FAST/SLOW em SERVICE. VARISPEED modifica a velocidade **tonal**; não é um transpositor contínuo de áudio ao vivo.
+- REC liga/desliga o processamento de fita deste plugin. MASTERSAFE passa o sinal original. REC não arma a gravação da DAW.
+- TRANSPORT MODELLING habilita wow/flutter, com aproximadamente 6 ms de atraso intencional de efeito. Não depende de apertar PLAY para processar áudio.
+- Stereo link vincula os controles L/R editados na interface. Automação da DAW continua independente por canal.
+- PLAY/STOP usam o atalho Espaço no Studio One/REAPER Windows. Não há uma API VST3 universal para comandar o transporte. ZERO LOC redefine a referência visual do contador; MEMO guarda/restaura essa referência, sem mover o cursor da DAW.
 
-```powershell
-python tools/generate_presets.py
-python tools/generate_parameters.py
-python tests/test_presets.py
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64
-cmake --build build --config Release --parallel 2
-ctest --test-dir build -C Release --output-on-failure
+## Compilar e testar
+
+JUCE 7.0.12 é fixado no commit `4f43011b96eb0636104cb3e433894cda98243626`. Requer CMake >= 3.22, C++17 e Python 3. No Linux, instale os pacotes de desenvolvimento ALSA, FreeType, X11/Xext/Xinerama/Xrandr/Xcursor e OpenGL, Xcomposite, Xvfb, xauth e Openbox para os testes gráficos. WebKit e libcurl não são necessários.
+
+```sh
+python3 tests/test_presets.py
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel 2
+ctest --test-dir build --output-on-failure
+xvfb-run -a sh -c 'openbox >/tmp/a800-openbox.log 2>&1 & build/processor_tests_artefacts/Release/processor_tests --gui'
 ```
 
-O CMake busca JUCE 7.0.12 no commit fixado. Para checkout existente use `-DJUCE_SOURCE_DIR=C:/caminho/JUCE`. A pasta gerada é `build/A800Prototype_artefacts/Release/VST3/A800 Technical Prototype.vst3`. Copie a pasta inteira para `%COMMONPROGRAMFILES%\VST3\` e faça nova varredura na DAW. Ainda requer teste numa DAW Windows real.
+No Windows, use MSVC 2022 x64 e `cmake --build build --config Release --parallel 2`, seguido de `ctest --test-dir build -C Release --output-on-failure`. O produto mantém o nome `A800 Technical Prototype.vst3` para preservar a identidade do plugin.
 
-`.github/workflows/windows.yml` prepara o build e testes MSVC em GitHub Actions quando o código for publicado; não foi executado nesta sessão.
+O ambiente na nuvem usa o contêiner `a800-dev`, fonte `/src`, build nativo `/build` e build Windows `/build-win`. A compilação Windows usa `cmake/mingw.cmake`, `A800_MINGW_ROOT=/usr`, `JUCE_SOURCE_DIR` e o `JUCE_HOST_HELPER` nativo; o executável do JUCE nativo não pode ser substituído por um executável Windows na compilação cruzada.
 
-## PLAY / STOP
+## Compatibilidade
 
-Os botões agora solicitam o transporte pela tecla Espaço da janela da DAW no Windows (Studio One / REAPER). A opção fica habilitada por padrão em SETTINGS e exige Espaço configurado como reproduzir/parar. Não se trata de uma API VST3 nativa de transporte. [Uso, testes e limites](docs/TRANSPORT-CONTROL.md). REC continua indicador.
+Os primeiros 64 IDs, ordem, versão de parâmetro e IDs VST3 foram mantidos. Seis parâmetros foram acrescentados ao final: drive, mix, hiss, wow, flutter e REC. Estados antigos schema 1 com 64 parâmetros recebem os novos valores padrão; estados novos usam schema 2. A restauração dos valores antigos não preserva o som linear da versão 0.2.1, pois o processamento de fita agora está ativo por padrão.
 
-## Presets
-
-90 alinhamentos de fábrica: 15 fitas × NAB/CCIR × 7,5/15/30 ips. Seleção pelo editor ou programas do host; estado salvo na sessão. [Detalhes e limites](docs/PRESETS.md). Estes presets **não são 90 timbres**: como o modelo de fita/EQ não existe, ficam sonoramente iguais em posição nominal.
-
-## Fontes e validação
-
-- [Tabela de parâmetros](docs/PARAMETERS.md), contrato JSON em `config/parameters.v1.json`.
-- [Roteamento pretendido](docs/AUDIO-MAPPING.md) e [dados pendentes](docs/TODO-MANUAL.md).
-- [Estado da implementação](docs/IMPLEMENTATION.md).
-- Testes de níveis/velocidades: `tests/mapping_tests.cpp`.
-- Testes do processador/estado/programas: `tests/processor_tests.cpp`.
-- Testes de presets/tabela: `python tests/test_presets.py`.
-
-O texto anexado é a fonte disponível. Os manuais SI 66/81 E e A800 Audio Adjustments e medições de referência não foram fornecidos. Não se declara fidelidade sonora ao hardware.
+Os 90 programas continuam alinhamentos de 15 perfis × NAB/CCIR × 7,5/15/30 ips. Os geradores `tools/generate_presets.py` e `tools/generate_parameters.py` atualizam arquivos versionados e só devem ser usados ao alterar deliberadamente o contrato de parâmetros.

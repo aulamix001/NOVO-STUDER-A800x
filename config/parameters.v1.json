@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "technical_prototype_partial_dsp_not_hardware_emulation",
+  "status": "tape_dsp_engineering_model_not_measurement_matched",
   "audio_channels": 2,
   "visual_channels": 2,
   "parameters": [
@@ -103,7 +103,7 @@
       "label": "ERASE FAST",
       "type": "float",
       "default": 0,
-      "effect": "visual",
+      "effect": "audio",
       "source": "user_specification_unverified_against_manual",
       "card": "1.180.714",
       "unit": "dB",
@@ -127,7 +127,7 @@
       "label": "ERASE SLOW",
       "type": "float",
       "default": 0,
-      "effect": "visual",
+      "effect": "audio",
       "source": "user_specification_unverified_against_manual",
       "card": "1.180.714",
       "unit": "dB",
@@ -139,7 +139,7 @@
       "label": "Oscillator stop",
       "type": "bool",
       "default": false,
-      "effect": "visual",
+      "effect": "audio",
       "source": "user_specification_unverified_against_manual"
     },
     {
@@ -246,7 +246,7 @@
       "label": "Repro input",
       "type": "choice",
       "default": "normal",
-      "effect": "visual",
+      "effect": "audio",
       "source": "user_specification_unverified_against_manual",
       "values": [
         "normal",
@@ -790,6 +790,85 @@
       "card": "1.180.714",
       "unit": "dB",
       "range_ref": "kFineBiasRangeDb"
+    },
+    {
+      "id": "tape_drive",
+      "version_hint": 1,
+      "label": "Tape drive",
+      "type": "float",
+      "default": 0,
+      "effect": "audio",
+      "source": "software_model",
+      "range": [
+        -12,
+        12
+      ],
+      "unit": "dB"
+    },
+    {
+      "id": "tape_mix",
+      "version_hint": 1,
+      "label": "Tape wet mix",
+      "type": "float",
+      "default": 100,
+      "effect": "audio",
+      "source": "software_model",
+      "range": [
+        0,
+        100
+      ],
+      "unit": "%"
+    },
+    {
+      "id": "tape_noise",
+      "version_hint": 1,
+      "label": "Tape hiss",
+      "type": "float",
+      "default": -80,
+      "effect": "audio",
+      "source": "software_model",
+      "range": [
+        -100,
+        -50
+      ],
+      "unit": "dBFS"
+    },
+    {
+      "id": "tape_wow",
+      "version_hint": 1,
+      "label": "Wow depth",
+      "type": "float",
+      "default": 15,
+      "effect": "audio",
+      "source": "software_model",
+      "range": [
+        0,
+        100
+      ],
+      "unit": "%"
+    },
+    {
+      "id": "tape_flutter",
+      "version_hint": 1,
+      "label": "Flutter depth",
+      "type": "float",
+      "default": 10,
+      "effect": "audio",
+      "source": "software_model",
+      "range": [
+        0,
+        100
+      ],
+      "unit": "%"
+    },
+    {
+      "id": "tape_record",
+      "version_hint": 1,
+      "label": "Tape processing enabled (REC)",
+      "type": "bool",
+      "default": true,
+      "effect": "audio",
+      "source": "software_model"
     }
   ],
   "speed_pairs_ips": {

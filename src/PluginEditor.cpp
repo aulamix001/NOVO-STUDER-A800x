@@ -90,7 +90,7 @@ struct ParameterRow final:juce::Component {
   if(id.startsWith("ch2_"))name="R / "+name.substring(2);
   label.setText(name,juce::dontSendNotification);label.setFont(18.f);addAndMakeVisible(label);
   const bool pending=p->getName(128).contains("[PENDING]");
-  const auto tip=pending?"Configuração armazenada; processamento sonoro ainda não implementado.":id;
+  const auto tip=pending?juce::String::fromUTF8(u8"Configuração armazenada; processamento sonoro ainda não implementado."):id;
   if(auto* c=dynamic_cast<juce::AudioParameterChoice*>(p)){
    for(int i=0;i<c->choices.size();++i)choice.addItem(c->choices[i],i+1);
    choice.setTooltip(tip);addAndMakeVisible(choice);ca=std::make_unique<ComboAttachment>(state,id,choice);
@@ -114,7 +114,7 @@ void setParameter(APVTS& s,const char* id,float v){
 }
 }
 
-struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce::ListBoxModel {
+struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce::ListBoxModel,private juce::AudioProcessorParameter::Listener {
  A800Processor& proc;
  MachineLook skin;
  juce::Image artwork;
@@ -125,17 +125,18 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
  std::vector<std::unique_ptr<ComboAttachment>> comboLinks;
  std::vector<std::unique_ptr<ButtonAttachment>> buttonLinks;
  std::vector<juce::Component*> machineControls;
- juce::TextButton machine{"MACHINE"},service{"SERVICE"},presets{"PRESETS"},settings{"SETTINGS"};
+ juce::TextButton machine{"MACHINE"},service{"SERVICE"},presets{"PRESETS"},settings{"TAPE FX"};
  juce::Viewport serviceView,settingsView;
  juce::Component serviceRows,settingsRows;
  juce::OwnedArray<ParameterRow> rows;
  juce::TextEditor search;
  juce::ListBox presetList{"Factory presets",this};
- juce::TextButton load{"CARREGAR"},previous{"ANTERIOR"},next{"PRÓXIMO"};
+ juce::TextButton load{"CARREGAR"},previous{"ANTERIOR"},next{juce::String::fromUTF8(u8"PRÓXIMO")};
  std::vector<int> filtered;
  juce::Label settingsInfo,transportStatus;
  juce::ToggleButton shortcutToggle;
  a800::TransportRequest transportRequest;
+ bool linking=false;std::array<bool,70> gestures{};
  int tab=0;float reelAngle=0;std::array<float,2> vu{{-20,-20}};
 
  explicit Canvas(A800Processor& p):proc(p){
@@ -164,16 +165,39 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
    buttonLinks.push_back(std::make_unique<ButtonAttachment>(proc.state,spec.first,*b));
   }
   addHit("ZERO LOC",{704,320,38,38},[this]{proc.zeroReference.store(proc.hostSeconds.load());});
-  addHit("MEMO",{763,320,38,38},[]{})->setTooltip("Detalhe visual da referência; não reposiciona a DAW.");
+  addHit("MEMO",{763,320,38,38},[this]{
+   if(!proc.memoActive.load()){proc.memoPosition.store(proc.zeroReference.load());proc.memoActive.store(true);}
+   else {proc.zeroReference.store(proc.memoPosition.load());proc.memoActive.store(false);}
+  })->setTooltip(juce::String::fromUTF8(u8"MEMO guarda a referência do contador; o segundo clique restaura essa referência. Não move a DAW."));
   for(auto entry:{std::pair<const char*,juce::Rectangle<int>>{"STOP",{649,650,60,46}},{"PLAY",{740,650,61,46}},{"REC",{829,650,60,46}}}){
    const juce::String name=entry.first;
-   auto* b=addHit(name,entry.second,[this,name]{if(name!="REC")requestTransport(name=="PLAY");});
-   b->setTooltip(name=="REC"?"Indicador de gravação da DAW.":"Controla PLAY/STOP pela tecla Espaço da janela da DAW no Windows. Requer atalho padrão; configuração em SETTINGS.");
+   auto* b=addHit(name,entry.second,[this,name]{if(name=="REC")setParameter(proc.state,"tape_record",1-value(proc.state,"tape_record"));else requestTransport(name=="PLAY");});
+   b->setTooltip(name=="REC"?juce::String::fromUTF8(u8"Ativa/desativa o processamento de fita deste plugin. Não arma a gravação da DAW."):juce::String::fromUTF8(u8"Controla PLAY/STOP pela tecla Espaço da janela da DAW no Windows. Requer atalho padrão; configuração em SETTINGS."));
   }
   setupService();setupSettings();setupPresets();showTab(0);startTimerHz(30);
+  for(auto* p:proc.getParameters())if(auto* rp=dynamic_cast<juce::RangedAudioParameter*>(p))if(rp->paramID.startsWith("ch"))p->addListener(this);
  }
  ~Canvas()override{
+  for(auto* p:proc.getParameters())if(auto* rp=dynamic_cast<juce::RangedAudioParameter*>(p))if(rp->paramID.startsWith("ch"))p->removeListener(this);
   stopTimer();presetList.setModel(nullptr);setLookAndFeel(nullptr);
+ }
+ void parameterGestureChanged(int index,bool active)override{
+  auto* mm=juce::MessageManager::getInstanceWithoutCreating();
+  if(mm&&mm->isThisTheMessageThread()&&index>=0&&index<int(gestures.size()))gestures[size_t(index)]=active;
+ }
+ void parameterValueChanged(int index,float normalised)override{
+  auto* mm=juce::MessageManager::getInstanceWithoutCreating();
+  if(!mm||!mm->isThisTheMessageThread()||index<0||index>=int(gestures.size())||!gestures[size_t(index)])return;
+  auto* p=dynamic_cast<juce::RangedAudioParameter*>(proc.getParameters()[index]);if(!p)return;
+  mirrorEdit(p->paramID,p->convertFrom0to1(normalised));
+ }
+ void mirrorEdit(const juce::String& id,float v){
+  auto* mm=juce::MessageManager::getInstanceWithoutCreating();
+  if(linking||!mm||!mm->isThisTheMessageThread()||value(proc.state,"stereo_link")<.5f)return;
+  if(!id.startsWith("ch1_")&&!id.startsWith("ch2_"))return;
+  juce::ScopedValueSetter<bool> guard(linking,true);
+  const auto other=(id.startsWith("ch1_")?juce::String("ch2_"):juce::String("ch1_"))+id.substring(4);
+  setParameter(proc.state,other.toRawUTF8(),v);
  }
  juce::Slider* addKnob(const char* id,juce::Rectangle<int> r,bool selector){
   auto* s=knobs.add(new juce::Slider);s->setComponentID(id);s->getProperties().set("selector",selector);
@@ -184,7 +208,7 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
   sliderLinks.push_back(std::make_unique<SliderAttachment>(proc.state,id,*s));return s;
  }
  void addCombo(const char* id,juce::Rectangle<int> r,juce::StringArray items){
-  auto* c=combos.add(new juce::ComboBox);c->setTooltip(proc.state.getParameter(id)->getName(128)+": configuração armazenada; DSP de fita pendente.");for(int i=0;i<items.size();++i)c->addItem(items[i],i+1);
+  auto* c=combos.add(new juce::ComboBox);c->setTooltip(proc.state.getParameter(id)->getName(128));for(int i=0;i<items.size();++i)c->addItem(items[i],i+1);
   c->setComponentID(id);addAndMakeVisible(c);c->setBounds(r);machineControls.push_back(c);
   comboLinks.push_back(std::make_unique<ComboAttachment>(proc.state,id,*c));
  }
@@ -196,28 +220,28 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
   int y=0;
   for(auto* parameter:proc.getParameters())if(auto* p=dynamic_cast<juce::RangedAudioParameter*>(parameter)){
    const auto& id=p->paramID;
-   if(id=="stereo_link"||id=="transport_modelling"||id=="alignment_dbfs"||id.startsWith("varispeed"))continue;
+   if(id=="stereo_link"||id=="transport_modelling"||id=="alignment_dbfs"||id.startsWith("varispeed")||(id.startsWith("tape_")&&id!="tape_type"))continue;
    auto* row=rows.add(new ParameterRow(proc.state,id));serviceRows.addAndMakeVisible(row);row->setBounds(0,y,1270,52);y+=54;
   }
   serviceRows.setSize(1270,y);
  }
  void setupSettings(){
-  settingsInfo.setText("VERSÃO VISUAL 0.2.1\n\nPLAY e STOP enviam a tecla Espaço à janela da DAW no Windows (Studio One / REAPER). Mantenha Espaço configurado como reproduzir/parar. As luzes continuam seguindo o estado real do host. REC é apenas indicador.\n\nO processamento de fita, EQ, bias e varispeed ainda está pendente. Os 90 presets são alinhamentos, não 90 timbres distintos.\n\nCALIBRATE seleciona a medição de saída; não gera sinal. Os VUs são indicadores RMS aproximados. RESET define a referência do contador sem mover o host.\n\nDuplo clique nos knobs restaura o padrão; Shift permite ajuste fino. Os ajustes sem DSP permanecem salvos no projeto.",juce::dontSendNotification);
+  settingsInfo.setText(juce::String::fromUTF8(u8"A800 TAPE DSP 0.3.0\n\nSaturação com processamento interno 4x, memória magnética aproximada, head bump, perda de agudos, EQ e hiss. Formulações são perfis de engenharia sem ajuste por medições do hardware.\n\nSERVICE: EQ REC/REPRO/SYNC, bias, erase, calibração e trimpots ativos por velocidade. INPUT monitora a entrada; REPRO/SYNC passam pelo modelo. REC ativa a fita; MASTERSAFE passa o original.\n\nVARISPEED altera a velocidade efetiva e o timbre, sem transpor continuamente o áudio ao vivo. TRANSPORT MODELLING ativa wow/flutter com atraso de cerca de 6 ms. MIX mistura original e fita; a mistura paralela pode produzir coloração de fase.\n\nPLAY/STOP: atalho Espaço no Studio One/REAPER Windows. MEMO guarda/restaura a referência do contador. CALIBRATE mede a saída. Stereo link vincula controles L/R editados na interface. Duplo clique restaura o padrão."),juce::dontSendNotification);
   settingsInfo.setFont(21.f);settingsInfo.setJustificationType(juce::Justification::topLeft);addAndMakeVisible(settingsInfo);settingsInfo.setBounds(125,190,1260,395);
-  shortcutToggle.setComponentID("transport_shortcut_enabled");shortcutToggle.setButtonText("PLAY / STOP via tecla Espaço da DAW (Windows)");
+  shortcutToggle.setComponentID("transport_shortcut_enabled");shortcutToggle.setButtonText(juce::String::fromUTF8(u8"PLAY / STOP via tecla Espaço da DAW (Windows)"));
   shortcutToggle.setToggleState(proc.transportShortcutEnabled.load(),juce::dontSendNotification);
   shortcutToggle.onClick=[this]{proc.transportShortcutEnabled.store(shortcutToggle.getToggleState());transportRequest.cancel();};
   addAndMakeVisible(shortcutToggle);shortcutToggle.setBounds(125,605,1260,36);
-  transportStatus.setText("Use o atalho padrão de espaço da DAW. Comandos são enviados apenas à janela do host.",juce::dontSendNotification);
+  transportStatus.setText(juce::String::fromUTF8(u8"Use o atalho padrão de espaço da DAW. Comandos são enviados apenas à janela do host."),juce::dontSendNotification);
   transportStatus.setFont(17.f);addAndMakeVisible(transportStatus);transportStatus.setBounds(125,648,1260,36);
   addAndMakeVisible(settingsView);settingsView.setBounds(112,700,1310,245);settingsView.setViewedComponent(&settingsRows,false);settingsView.setScrollBarsShown(true,false);
-  int y=0;for(const auto* id:{"stereo_link","alignment_dbfs","transport_modelling","varispeed_on","varispeed_semitones"}){
+  int y=0;for(const auto* id:{"tape_drive","tape_mix","tape_noise","transport_modelling","tape_wow","tape_flutter","stereo_link","alignment_dbfs","varispeed_on","varispeed_semitones","tape_record"}){
    auto* row=rows.add(new ParameterRow(proc.state,id));settingsRows.addAndMakeVisible(row);row->setBounds(0,y,1270,52);y+=54;
   }settingsRows.setSize(1270,y);
  }
  void setupPresets(){
   search.setComponentID("presetSearch");presetList.setComponentID("presetList");load.setComponentID("loadPreset");
-  addAndMakeVisible(search);search.setBounds(125,183,1260,48);search.setTextToShowWhenEmpty("Buscar alinhamento, fita, velocidade ou EQ…",juce::Colour(0xff93938d));search.setFont(21.f);
+  addAndMakeVisible(search);search.setBounds(125,183,1260,48);search.setTextToShowWhenEmpty(juce::String::fromUTF8(u8"Buscar alinhamento, fita, velocidade ou EQ…"),juce::Colour(0xff93938d));search.setFont(21.f);
   search.onTextChange=[this]{filterPresets();};
   addAndMakeVisible(presetList);presetList.setBounds(125,250,1260,620);presetList.setRowHeight(44);presetList.setColour(juce::ListBox::backgroundColourId,juce::Colour(0xff14191b));
   addAndMakeVisible(load);addAndMakeVisible(previous);addAndMakeVisible(next);
@@ -256,21 +280,22 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
    return dispatchResult==a800::ShortcutResult::queued;
   });
   juce::String text;
-  if(result==a800::TransportRequest::Result::queued)text=play?"PLAY solicitado à DAW pela tecla Espaço.":"STOP solicitado à DAW pela tecla Espaço.";
-  else if(result==a800::TransportRequest::Result::alreadyInState)text=play?"PLAY já ativo ou solicitado.":"STOP já ativo ou solicitado.";
-  else if(dispatchResult==a800::ShortcutResult::disabled)text="Ative PLAY / STOP via tecla Espaço em SETTINGS.";
-  else if(dispatchResult==a800::ShortcutResult::unsupportedHost)text="Transporte por atalho disponível no Studio One / REAPER para Windows.";
-  else text="Não foi possível enviar o comando à janela da DAW. Confira a janela ativa e as configurações.";
+  if(result==a800::TransportRequest::Result::queued)text=play?juce::String::fromUTF8(u8"PLAY solicitado à DAW pela tecla Espaço."):juce::String::fromUTF8(u8"STOP solicitado à DAW pela tecla Espaço.");
+  else if(result==a800::TransportRequest::Result::alreadyInState)text=play?juce::String::fromUTF8(u8"PLAY já ativo ou solicitado."):juce::String::fromUTF8(u8"STOP já ativo ou solicitado.");
+  else if(dispatchResult==a800::ShortcutResult::disabled)text=juce::String::fromUTF8(u8"Ative PLAY / STOP via tecla Espaço em SETTINGS.");
+  else if(dispatchResult==a800::ShortcutResult::unsupportedHost)text=juce::String::fromUTF8(u8"Transporte por atalho disponível no Studio One / REAPER para Windows.");
+  else text=juce::String::fromUTF8(u8"Não foi possível enviar o comando à janela da DAW. Confira a janela ativa e as configurações.");
   transportStatus.setText(text,juce::dontSendNotification);
   if(auto* b=dynamic_cast<Hotspot*>(findChildWithID(play?"PLAY":"STOP")))b->setTooltip(text+" Abra SETTINGS para configurar.");
  }
  void timerCallback()override{
   transportRequest.observe(proc.hostPlaying.load(),proc.transportRevision.load(),juce::Time::getMillisecondCounterHiRes());
-  if(transportRequest.takeExpiredConfirmation())transportStatus.setText("Comando enviado sem confirmação do host. Confira se Espaço é o atalho reproduzir/parar da DAW.",juce::dontSendNotification);
+  if(transportRequest.takeExpiredConfirmation())transportStatus.setText(juce::String::fromUTF8(u8"Comando enviado sem confirmação do host. Confira se Espaço é o atalho reproduzir/parar da DAW."),juce::dontSendNotification);
   if(tab==3)shortcutToggle.setToggleState(proc.transportShortcutEnabled.load(),juce::dontSendNotification);
   if(proc.hostPlaying.load())reelAngle+=.035f;
   for(int ch=0;ch<2;++ch){
-   auto alignment=value(proc.state,"alignment_dbfs");
+   const float references[]{0,4,6,8};
+   auto alignment=value(proc.state,"alignment_dbfs")+references[juce::jlimit(0,3,int(value(proc.state,"vu_jumper")))]-4;
    auto target=juce::Decibels::gainToDecibels(proc.meterRms[size_t(ch)].load(),-80.f)-alignment;
    vu[size_t(ch)]+=.18f*(juce::jlimit(-23.f,5.f,target)-vu[size_t(ch)]);
   }
@@ -332,7 +357,7 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
    g.setGradientFill({juce::Colour(0xff2a3033),93,84,juce::Colour(0xff151a1c),1445,997,false});g.fillRoundedRectangle(r,3);
    g.setColour(juce::Colour(0xff747775));g.drawRoundedRectangle(r.reduced(1),3,1);
    g.setColour(juce::Colour(0xffe6e1d3));g.setFont(30.f);
-   g.drawText(tab==1?"SERVICE / AUDIO ALIGNMENT":tab==2?"PRESETS / FACTORY ALIGNMENTS":"SETTINGS / CONFIGURAÇÃO",125,110,1200,45,juce::Justification::centredLeft);
+   g.drawText(tab==1?"SERVICE / AUDIO ALIGNMENT":tab==2?"PRESETS / FACTORY ALIGNMENTS":juce::String::fromUTF8(u8"SETTINGS / CONFIGURAÇÃO"),125,110,1200,45,juce::Justification::centredLeft);
    g.setColour(juce::Colour(0xffb99b64));g.fillRect(125,163,1260,1);
    return;
   }
@@ -341,7 +366,7 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
   for(int i=0;i<2;++i){auto r=juce::Rectangle<float>(i==0?449.f:531.f,759,69,23);lamp(g,r,i==int(fast));g.setColour(juce::Colours::black);g.setFont(13.f);g.drawText(i==0?"SLOW":"FAST",r.toNearestInt(),juce::Justification::centred);}
   for(int i=0;i<2;++i){auto r=juce::Rectangle<float>(i==0?678.f:759.f,759,68,23);lamp(g,r,i==int(!nab));g.setColour(juce::Colours::black);g.setFont(13.f);g.drawText(i==0?"NAB":"CCIR",r.toNearestInt(),juce::Justification::centred);}
   lamp(g,{1182,742,49,28},value(proc.state,"calibrate")>.5f);lamp(g,{1309,742,48,28},value(proc.state,"mastersafe")>.5f);
-  const bool playing=proc.hostPlaying.load(),recording=proc.hostRecording.load();
+  const bool playing=proc.hostPlaying.load(),recording=value(proc.state,"tape_record")>.5f;
   lamp(g,{657,656,45,31},!playing);lamp(g,{748,656,45,31},playing);lamp(g,{836,656,45,31},recording,true);
   g.setColour(juce::Colour(0xff111416));g.fillRect(670,664,16,15);juce::Path play;play.addTriangle(762,661,762,682,782,672);g.fillPath(play);g.fillEllipse(851,665,14,14);
  }

@@ -1,16 +1,5 @@
-# Estado da implementação
+# Implementação 0.3.0
 
-| Área | Implementado | Pendente |
-|---|---|---|
-| Host | VST3 estéreo; 64 parâmetros IDs v1 | Validação em DAW Windows real |
-| Áudio | Ganhos L/R, Level Fast/Slow, rotas INPUT/REPRO/SYNC, MASTERSAFE; rampa de ganhos | Fita, bias, EQ, perda de cabeças, SYNC narrow/wide |
-| Referências | Fluxo/VU, calibração e velocidades em funções isoladas | Integrar medição VU/calibrate ao plugin |
-| Presets | 90 alinhamentos, programas do host, JSONs de fábrica | Diferenças de timbre dependem do DSP; import/export UI, usuário, busca/A-B |
-| Estado | APVTS, schema v1, rejeição de estados incompletos/inválidos | Migrações de versões futuras |
-| Interface | Painel com arte de referência, knobs, seletores, VUs RMS, contador, animações, abas e busca de presets | Validação em Studio One Pro 8 real |
-| Tempo real | Ganhos suavizados, denormais, sem construção de strings ou alocação explícita no processBlock | Auditoria RT completa/automação sob carga |
-| Transporte | Leitura do host, contador, zero persistido, animação e PLAY/STOP via atalho Windows (0.2.1) | Varispeed, flutter, ruído e integração de transporte com outros hosts/atalhos |
+O DSP de fita, a tabela completa de controles e suas limitações estão em [TAPE-DSP.md](TAPE-DSP.md). Os controles antigos de áudio agora alimentam o modelo de fita; os 64 IDs anteriores foram preservados e seis parâmetros foram acrescentados ao final. Os estados antigos recebem valores padrão para os novos parâmetros.
 
-O mapeamento documental anterior permanece como especificação pretendida. Não interpretar uma entrada nesse documento como recurso já implementado. Os nomes de parâmetros do host preservam `[PENDING]`, inclusive tape_type/EQ. A interface visual mostra etiquetas limpas e explica as limitações em SETTINGS e tooltips. `[VISUAL]` marca controles sem efeito sonoro por requisito.
-
-O número de programa indica o último preset carregado, mesmo após edição manual de parâmetros; o estado completo, não esse número, determina os ajustes restaurados.
+O modelo aproxima efeitos de fita por filtros e saturação com memória, sem medições da A800. A validação automatizada verifica software e interface, não equivalência física. PLAY/STOP permanecem limitados aos hosts Windows suportados; REC controla o efeito e MEMO controla a referência do contador.
