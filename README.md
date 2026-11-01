@@ -1,4 +1,4 @@
-# A800 — VST3 estéreo / interface visual 0.2.0
+# A800 — VST3 estéreo / interface visual 0.2.1
 
 Este projeto ainda **não emula o som de fita da A800**. Implementa infraestrutura JUCE, 64 parâmetros versionados, ganhos por canal com suavização, seleção INPUT/REPRO/SYNC em nível de roteamento/ganho, MASTERSAFE limpo, persistência de estado e 90 programas de alinhamento. A interface MACHINE agora utiliza a própria arte estéreo de referência, com knobs, seletores, medidores e contador interativos. [Detalhes da interface](docs/VISUAL-INTERFACE.md).
 
@@ -22,6 +22,10 @@ ctest --test-dir build -C Release --output-on-failure
 O CMake busca JUCE 7.0.12 no commit fixado. Para checkout existente use `-DJUCE_SOURCE_DIR=C:/caminho/JUCE`. A pasta gerada é `build/A800Prototype_artefacts/Release/VST3/A800 Technical Prototype.vst3`. Copie a pasta inteira para `%COMMONPROGRAMFILES%\VST3\` e faça nova varredura na DAW. Ainda requer teste numa DAW Windows real.
 
 `.github/workflows/windows.yml` prepara o build e testes MSVC em GitHub Actions quando o código for publicado; não foi executado nesta sessão.
+
+## PLAY / STOP
+
+Os botões agora solicitam o transporte pela tecla Espaço da janela da DAW no Windows (Studio One / REAPER). A opção fica habilitada por padrão em SETTINGS e exige Espaço configurado como reproduzir/parar. Não se trata de uma API VST3 nativa de transporte. [Uso, testes e limites](docs/TRANSPORT-CONTROL.md). REC continua indicador.
 
 ## Presets
 

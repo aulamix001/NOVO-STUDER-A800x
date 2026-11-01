@@ -23,8 +23,10 @@ int main(int argc,char**){
  for(int ch=0;ch<2;++ch)for(int n=0;n<512;++n)b.setSample(ch,n,0.1f);
  p.processBlock(b,midi);check(b.getSample(0,511)>b.getSample(1,511));
  juce::MemoryBlock state;p.getStateInformation(state);
+ p.transportShortcutEnabled.store(false);
  set(p,"ch1_rec_input_level",0);p.setStateInformation(state.getData(),int(state.getSize()));
  check(p.state.getRawParameterValue("ch1_rec_input_level")->load()==3);
+ check(p.transportShortcutEnabled.load());
  const char invalid[]="invalid";p.setStateInformation(invalid,sizeof(invalid));
  check(p.state.getRawParameterValue("ch1_rec_input_level")->load()==3);
  set(p,"mastersafe",1);p.prepareToPlay(48000,512);
@@ -37,6 +39,9 @@ int main(int argc,char**){
   for(int attempt=0;attempt<3;++attempt){
    std::unique_ptr<juce::AudioProcessorEditor> e(p.createEditorIfNeeded());check(e!=nullptr);
    e->setSize(1152,768);e->addToDesktop(0);e->setVisible(true);
+   auto* play=find(*e,"PLAY");auto* stop=find(*e,"STOP");check(play!=nullptr&&stop!=nullptr);
+   auto* button=dynamic_cast<juce::Button*>(play);check(button!=nullptr);button->onClick();
+   check(!p.hostPlaying.load()); // A failed/unsupported command must not fake playback.
    auto* input=dynamic_cast<juce::Slider*>(find(*e,"ch1_rec_input_level"));check(input!=nullptr);
    input->setValue(-1.5,juce::sendNotificationSync);check(p.state.getRawParameterValue("ch1_rec_input_level")->load()==-1.5f);
    auto* tape=dynamic_cast<juce::ComboBox*>(find(*e,"tape_type"));check(tape!=nullptr);
@@ -55,7 +60,7 @@ int main(int argc,char**){
    if(attempt==0){
     p.setCurrentProgram(18);
     auto snapshot=e->createComponentSnapshot(e->getLocalBounds());check(snapshot.isValid());
-    juce::File output("/tmp/a800-visual-ui.png");auto stream=output.createOutputStream();check(stream!=nullptr);
+    auto output=juce::File::getSpecialLocation(juce::File::tempDirectory).getChildFile("a800-visual-ui.png");auto stream=output.createOutputStream();check(stream!=nullptr);check(stream->setPosition(0));check(stream->truncate().wasOk());
     juce::PNGImageFormat format;check(format.writeImageToStream(snapshot,*stream));
    }
    e->setSize(768,512);check(e->getWidth()==768);e->setSize(1536,1024);e->setVisible(false);

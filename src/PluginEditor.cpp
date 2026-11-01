@@ -1,5 +1,7 @@
 #include "PluginEditor.h"
 #include "BinaryData.h"
+#include "transport/TransportRequest.h"
+#include "transport/WindowsTransport.h"
 #include <vector>
 #include <cmath>
 
@@ -72,7 +74,10 @@ struct MachineLook final:juce::LookAndFeel_V4 {
 };
 struct Hotspot final:juce::Button {
  explicit Hotspot(const juce::String& name):Button(name){}
- void paintButton(juce::Graphics&,bool,bool)override{}
+ void paintButton(juce::Graphics& g,bool over,bool down)override{
+  if(over||down){g.setColour(juce::Colour(0xffffcc77).withAlpha(down?.3f:.1f));g.fillRoundedRectangle(getLocalBounds().toFloat().reduced(1),2);
+   g.setColour(juce::Colour(0xffefd191).withAlpha(.75f));g.drawRoundedRectangle(getLocalBounds().toFloat().reduced(1),2,1);}
+ }
 };
 struct ParameterRow final:juce::Component {
  juce::Label label;juce::Slider slider;juce::ComboBox choice;juce::ToggleButton toggle;
@@ -128,7 +133,9 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
  juce::ListBox presetList{"Factory presets",this};
  juce::TextButton load{"CARREGAR"},previous{"ANTERIOR"},next{"PRÓXIMO"};
  std::vector<int> filtered;
- juce::Label settingsInfo;
+ juce::Label settingsInfo,transportStatus;
+ juce::ToggleButton shortcutToggle;
+ a800::TransportRequest transportRequest;
  int tab=0;float reelAngle=0;std::array<float,2> vu{{-20,-20}};
 
  explicit Canvas(A800Processor& p):proc(p){
@@ -159,7 +166,9 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
   addHit("ZERO LOC",{704,320,38,38},[this]{proc.zeroReference.store(proc.hostSeconds.load());});
   addHit("MEMO",{763,320,38,38},[]{})->setTooltip("Detalhe visual da referência; não reposiciona a DAW.");
   for(auto entry:{std::pair<const char*,juce::Rectangle<int>>{"STOP",{649,650,60,46}},{"PLAY",{740,650,61,46}},{"REC",{829,650,60,46}}}){
-   auto* b=addHit(entry.first,entry.second,[]{});b->setTooltip("Indicação do transporte do host. Não controla a DAW.");
+   const juce::String name=entry.first;
+   auto* b=addHit(name,entry.second,[this,name]{if(name!="REC")requestTransport(name=="PLAY");});
+   b->setTooltip(name=="REC"?"Indicador de gravação da DAW.":"Controla PLAY/STOP pela tecla Espaço da janela da DAW no Windows. Requer atalho padrão; configuração em SETTINGS.");
   }
   setupService();setupSettings();setupPresets();showTab(0);startTimerHz(30);
  }
@@ -193,9 +202,15 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
   serviceRows.setSize(1270,y);
  }
  void setupSettings(){
-  settingsInfo.setText("VERSÃO VISUAL 0.2.0\n\nO painel usa a imagem de referência. Os controles de ganho e monitoração estão ligados ao estado do plugin.\n\nFita, EQ, bias, varispeed e modelagem de transporte ainda aguardam DSP e validação. Os 90 presets são alinhamentos; ainda não são 90 timbres diferentes.\n\nCALIBRATE seleciona a medição de saída; não gera sinal nem força um nível de saída. Os VUs são indicadores RMS com balística aproximada, não uma certificação de medição do hardware.\n\nOs botões STOP / PLAY / REC indicam o transporte da DAW. RESET define a referência do contador sem alterar o host.\n\nOs ajustes SERVICE sem processamento sonoro são preservados no projeto e identificados por tooltip. Duplo clique nos knobs restaura o padrão; Shift permite ajuste fino.",juce::dontSendNotification);
-  settingsInfo.setFont(21.f);settingsInfo.setJustificationType(juce::Justification::topLeft);addAndMakeVisible(settingsInfo);settingsInfo.setBounds(125,190,1260,420);
-  addAndMakeVisible(settingsView);settingsView.setBounds(112,640,1310,295);settingsView.setViewedComponent(&settingsRows,false);settingsView.setScrollBarsShown(true,false);
+  settingsInfo.setText("VERSÃO VISUAL 0.2.1\n\nPLAY e STOP enviam a tecla Espaço à janela da DAW no Windows (Studio One / REAPER). Mantenha Espaço configurado como reproduzir/parar. As luzes continuam seguindo o estado real do host. REC é apenas indicador.\n\nO processamento de fita, EQ, bias e varispeed ainda está pendente. Os 90 presets são alinhamentos, não 90 timbres distintos.\n\nCALIBRATE seleciona a medição de saída; não gera sinal. Os VUs são indicadores RMS aproximados. RESET define a referência do contador sem mover o host.\n\nDuplo clique nos knobs restaura o padrão; Shift permite ajuste fino. Os ajustes sem DSP permanecem salvos no projeto.",juce::dontSendNotification);
+  settingsInfo.setFont(21.f);settingsInfo.setJustificationType(juce::Justification::topLeft);addAndMakeVisible(settingsInfo);settingsInfo.setBounds(125,190,1260,395);
+  shortcutToggle.setComponentID("transport_shortcut_enabled");shortcutToggle.setButtonText("PLAY / STOP via tecla Espaço da DAW (Windows)");
+  shortcutToggle.setToggleState(proc.transportShortcutEnabled.load(),juce::dontSendNotification);
+  shortcutToggle.onClick=[this]{proc.transportShortcutEnabled.store(shortcutToggle.getToggleState());transportRequest.cancel();};
+  addAndMakeVisible(shortcutToggle);shortcutToggle.setBounds(125,605,1260,36);
+  transportStatus.setText("Use o atalho padrão de espaço da DAW. Comandos são enviados apenas à janela do host.",juce::dontSendNotification);
+  transportStatus.setFont(17.f);addAndMakeVisible(transportStatus);transportStatus.setBounds(125,648,1260,36);
+  addAndMakeVisible(settingsView);settingsView.setBounds(112,700,1310,245);settingsView.setViewedComponent(&settingsRows,false);settingsView.setScrollBarsShown(true,false);
   int y=0;for(const auto* id:{"stereo_link","alignment_dbfs","transport_modelling","varispeed_on","varispeed_semitones"}){
    auto* row=rows.add(new ParameterRow(proc.state,id));settingsRows.addAndMakeVisible(row);row->setBounds(0,y,1270,52);y+=54;
   }settingsRows.setSize(1270,y);
@@ -229,11 +244,30 @@ struct A800Editor::Canvas final:juce::Component,private juce::Timer,private juce
  void showTab(int page){
   tab=page;machine.setToggleState(tab==0,juce::dontSendNotification);service.setToggleState(tab==1,juce::dontSendNotification);presets.setToggleState(tab==2,juce::dontSendNotification);settings.setToggleState(tab==3,juce::dontSendNotification);
   for(auto* c:machineControls)c->setVisible(tab==0);
-  serviceView.setVisible(tab==1);settingsView.setVisible(tab==3);settingsInfo.setVisible(tab==3);
+  serviceView.setVisible(tab==1);settingsView.setVisible(tab==3);settingsInfo.setVisible(tab==3);shortcutToggle.setVisible(tab==3);transportStatus.setVisible(tab==3);
   for(juce::Component* c:std::array<juce::Component*,5>{{&search,&presetList,&load,&previous,&next}})c->setVisible(tab==2);
   repaint();
  }
+ void requestTransport(bool play){
+  a800::ShortcutResult dispatchResult=a800::ShortcutResult::disabled;
+  auto result=transportRequest.request(play,proc.hostPlaying.load(),proc.transportRevision.load(),juce::Time::getMillisecondCounterHiRes(),[&]{
+   if(!proc.transportShortcutEnabled.load())return false;
+   auto* peer=getPeer();dispatchResult=a800::sendDawSpaceShortcut(peer?peer->getNativeHandle():nullptr);
+   return dispatchResult==a800::ShortcutResult::queued;
+  });
+  juce::String text;
+  if(result==a800::TransportRequest::Result::queued)text=play?"PLAY solicitado à DAW pela tecla Espaço.":"STOP solicitado à DAW pela tecla Espaço.";
+  else if(result==a800::TransportRequest::Result::alreadyInState)text=play?"PLAY já ativo ou solicitado.":"STOP já ativo ou solicitado.";
+  else if(dispatchResult==a800::ShortcutResult::disabled)text="Ative PLAY / STOP via tecla Espaço em SETTINGS.";
+  else if(dispatchResult==a800::ShortcutResult::unsupportedHost)text="Transporte por atalho disponível no Studio One / REAPER para Windows.";
+  else text="Não foi possível enviar o comando à janela da DAW. Confira a janela ativa e as configurações.";
+  transportStatus.setText(text,juce::dontSendNotification);
+  if(auto* b=dynamic_cast<Hotspot*>(findChildWithID(play?"PLAY":"STOP")))b->setTooltip(text+" Abra SETTINGS para configurar.");
+ }
  void timerCallback()override{
+  transportRequest.observe(proc.hostPlaying.load(),proc.transportRevision.load(),juce::Time::getMillisecondCounterHiRes());
+  if(transportRequest.takeExpiredConfirmation())transportStatus.setText("Comando enviado sem confirmação do host. Confira se Espaço é o atalho reproduzir/parar da DAW.",juce::dontSendNotification);
+  if(tab==3)shortcutToggle.setToggleState(proc.transportShortcutEnabled.load(),juce::dontSendNotification);
   if(proc.hostPlaying.load())reelAngle+=.035f;
   for(int ch=0;ch<2;++ch){
    auto alignment=value(proc.state,"alignment_dbfs");

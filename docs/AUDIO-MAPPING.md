@@ -26,7 +26,7 @@ NAB/CCIR exige pré/de-ênfase coerente ao redor da não linearidade. Frequênci
 | INPUT/SYNC/REPRO 1 e 2 | ch1_src e ch2_src |
 | INPUT/SYNC/REPRO 3–24 | Sem ligação de áudio; não duplicar L/R para simular 24 pistas |
 | READY | Indicação; sem parâmetro sonoro fictício; relação com REC depende de confirmação no manual |
-| PLAY/STOP/REC/PAUSE | Indicação do transporte do host; não condiciona o DSP do insert |
+| PLAY/STOP/REC/PAUSE | PLAY/STOP: a partir de 0.2.1, atalho Espaço direcionado à DAW no Windows; REC/PAUSE continuam indicação. Não condiciona o DSP do insert |
 | FF/REW/LOCATE/EDIT | Representação visual; não reposiciona o host nem altera o áudio |
 | Contador | Tempo do host; ZERO LOC armazena uma referência local |
 | ERASE / oscillator stop / repro external | Estado visual persistido, sem efeito de áudio conforme especificação fornecida |

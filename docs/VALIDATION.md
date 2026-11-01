@@ -1,27 +1,27 @@
-# Validação — interface visual 0.2.0
+# Validação — PLAY/STOP 0.2.1
 
-Esta versão substitui o editor técnico por um painel com a arte estéreo fornecida como referência. O motor de áudio continua parcial: não implementa saturação, curvas de fita, EQ, bias ou flutter.
+A alteração liga os botões ao atalho Espaço da janela da DAW no Windows. Não é uma API nativa VST3 de transporte e exige o atalho de reprodução/parada padrão. Consulte TRANSPORT-CONTROL.md.
 
 | Verificação | Resultado |
 |---|---|
-| Build Windows x64, JUCE 7.0.12 / MinGW-w64 | Passou; metadados VST3 confirmam 0.2.0 |
-| Testes C++ de níveis, velocidades, 64 parâmetros, 90 programas, estado e ganhos L/R | Passou no Linux / JUCE 8.0.6 |
-| Medição RMS e MASTERSAFE | Passou nos testes do processador |
-| Abrir/fechar o novo editor três vezes | Passou no teste direto Linux / Xvfb |
-| Knob INPUT LEVEL e seletor Tape ligados ao estado | Passou no teste de interação |
-| Abas MACHINE / SERVICE / PRESETS / SETTINGS | Passou no teste de interação |
-| Busca AMPEX 456 retorna seis alinhamentos; seleção/carregamento | Passou no teste de interação |
-| Redimensionamento e captura renderizada da interface | Passou; captura disponível em downloads/interface-0.2.0.png |
-| Dois testes Python da matriz de presets e tabela | Passou |
-| pluginval 1.0.4 strictness 5, binário Windows 0.2.0 sob Wine 10, sem GUI | SUCCESS, exit 0 |
-| pluginval completo sob Wine 10 | Falhou por timeout de 30 s em Editor, como na versão anterior |
-| Steinberg validator separado | Não executado; pluginval informa skip por falta do executável |
-| DAW Windows real / Studio One Pro 8 | Não executado neste ambiente Linux |
+| Build VST3 Windows x64 / JUCE 7.0.12 / MinGW-w64 | Passou, versão 0.2.1 confirmada pelo pluginval |
+| CTest nativo Linux | 3 de 3 passaram: níveis, política de transporte, processador/estado |
+| Política de PLAY/STOP | Passou: clique repetido, confirmação atrasada, solicitação oposta pendente, indisponibilidade e timeout |
+| Mensagens Win32 em janela simulada sob Wine | Passou: PLAY seguido de STOP; repetir PLAY não alterna duas vezes |
+| Editor final Linux / Xvfb | Passou: abrir/fechar 3x, callbacks de transporte sem simular estado, knobs, seletores, abas, busca e resize |
+| Configuração do transporte salva/restaurada | Passou no teste do processador; permanece como propriedade de software, sem novo parâmetro de áudio |
+| pluginval 1.0.4 strictness 5 sem GUI, binário Windows 0.2.1 sob Wine | SUCCESS, exit 0, até 192 kHz |
+| Dois testes Python da matriz de 90 presets | Passaram |
+| Studio One Pro 8 real / atalhos do usuário | Não executado neste ambiente; ainda requer validação na instalação do usuário |
+| pluginval completo com GUI 0.2.1 | Não executado; a execução 0.2.0 teve timeout no Editor sob Wine, registrado em VALIDATION-0.2.0.md |
+| Steinberg validator separado | Não executado; ferramenta não fornecida |
 
-O pluginval sem GUI usou sample rates 44100/48000/96000/192000 Hz, blocos 64/128/256/512/1024 e seed 12345. Foram concluídos processamento, estado, automação, 90 programas e buses. Os testes de GUI foram omitidos explicitamente nessa execução, portanto não se declara aprovação completa strictness 5.
+O teste de integração Windows foi realizado em processo/janela simulados, deliberadamente nomeados para exercitar a identificação do host. Ele valida o envio e recebimento Win32; não é Studio One e não comprova como o Studio One real interpreta o atalho. Esse executável de teste não é distribuído no ZIP VST3.
 
-O novo editor não contém um GenericAudioProcessorEditor aninhado. A tela usa a imagem embutida mais controles próprios. O teste direto Linux abriu e fechou o editor, operou controles/abas e gerou um screenshot real. Isso não substitui o teste do binário na DAW Windows: o timeout observado sob Wine ainda não tem causa isolada.
+O pluginval sem GUI usou 44100/48000/96000/192000 Hz, blocos 64/128/256/512/1024 e seed 12345. Concluiu processamento, estado, automação, programas e buses. Nenhuma aprovação completa de GUI é reivindicada.
 
-Os identificadores VST3 e os IDs/version hints dos 64 parâmetros foram mantidos. O estado mantém schema 1; foi acrescentada a propriedade opcional zero_reference para o contador. A balística VU é aproximada; CALIBRATE seleciona a medição de saída e não implementa a calibração −3 dBu do hardware.
+O helper usa WM_KEYDOWN/WM_KEYUP apenas na janela identificada do processo atual. Não utiliza SendInput global. Nunca lê getPlayHead/getPosition na interface: a thread de áudio publica os estados por atomics. Carregar uma sessão ou preset não envia comandos. REC continua indicador.
 
-Os logs desta versão estão em logs/visual-020-audio.log e logs/visual-020-full.log dentro do ZIP. Resultados antigos permanecem no histórico docs/VALIDATION-0.1.0.md.
+Logs no ZIP: transport-021-audio.log, transport-021-win32-final.log, transport-021-ctest.log e transport-021-editor.log. Os IDs VST3/64 parâmetros e schema 1 permanecem compatíveis; transport_shortcut_enabled é uma propriedade opcional, padrão habilitado.
+
+O processamento de fita, EQ, bias e saturação permanece pendente; esta versão corrige a ação dos controles de transporte e não conclui o modelo analógico.

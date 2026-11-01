@@ -47,12 +47,14 @@ void A800Processor::prepareToPlay(double sr,int) {
 }
 void A800Processor::processBlock(juce::AudioBuffer<float>& b,juce::MidiBuffer&) {
  juce::ScopedNoDenormals guard;
- hostPlaying.store(false);hostRecording.store(false);
+ bool playing=false,recording=false;
  if(auto* ph=getPlayHead()) if(auto pos=ph->getPosition()) {
-  hostPlaying.store(pos->getIsPlaying());hostRecording.store(pos->getIsRecording());
+  playing=pos->getIsPlaying();recording=pos->getIsRecording();
   if(auto t=pos->getTimeInSeconds())if(std::isfinite(*t))hostSeconds.store(*t);
  }
 
+ if(hostPlaying.exchange(playing)!=playing)transportRevision.fetch_add(1);
+ hostRecording.store(recording);
  for(int ch=0;ch<b.getNumChannels();++ch) {
   if(ch>=2) {b.clear(ch,0,b.getNumSamples());continue;}
   const float inputRms=b.getRMSLevel(ch,0,b.getNumSamples());
@@ -81,6 +83,7 @@ void A800Processor::getStateInformation(juce::MemoryBlock& b) {
  auto tree=state.copyState(); tree.setProperty("schema_version",1,nullptr);
  tree.setProperty("program",currentProgram.load(),nullptr);
  tree.setProperty("zero_reference",zeroReference.load(),nullptr);
+ tree.setProperty("transport_shortcut_enabled",transportShortcutEnabled.load(),nullptr);
  if(auto xml=tree.createXml()) copyXmlToBinary(*xml,b);
 }
 void A800Processor::setStateInformation(const void* data,int size) {
@@ -106,6 +109,7 @@ void A800Processor::setStateInformation(const void* data,int size) {
  state.replaceState(tree);currentProgram.store(program);
  const double zero=double(tree.getProperty("zero_reference",0.0));
  if(std::isfinite(zero))zeroReference.store(zero);
+ transportShortcutEnabled.store(bool(tree.getProperty("transport_shortcut_enabled",true)));
 }
 juce::AudioProcessorEditor* A800Processor::createEditor() {return new A800Editor(*this);}
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() {return new A800Processor();}

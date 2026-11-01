@@ -26,6 +26,8 @@ public:
  // UI observes atomics only; no editor or graphics work on the audio thread.
  std::array<std::atomic<float>,2> meterRms{{0.f,0.f}};
  std::atomic<bool> hostPlaying{false},hostRecording{false};
+ std::atomic<bool> transportShortcutEnabled{true};
+ std::atomic<std::uint64_t> transportRevision{0};
  std::atomic<double> hostSeconds{0.0},zeroReference{0.0};
 private:
  struct Channel {
